@@ -1,0 +1,94 @@
+unit Classes.Banco;
+
+interface
+uses   System.Generics.Collections, System.SysUtils,
+Classes.Clientes, Classes.Contas;
+
+type
+  TBanco = class
+
+  private
+    FClientes:  Tobjectlist<TCliente>;
+    FContas:      Tobjectlist<TConta>;
+
+
+
+    function GerarRelatorioTransacoes:   string;
+
+  protected
+    { protected declarations }
+  public
+    constructor create;
+    destructor destroy; override;
+
+    procedure AdicionarConta(aConta: TConta);
+    procedure AdicionarCliente(aCliente: TCliente);
+
+    function BuscarConta(aNumero:string): TConta;
+    function BuscarCliente(aCPF: string): TCliente;
+
+    procedure DesativarConta(aConta: string);
+    procedure DesativarCliente(aConta: string);
+
+end;
+implementation
+//construtor
+  constructor TBanco.create;
+  begin
+    FClientes:= Tobjectlist<TCliente>.Create;
+    FContas:= Tobjectlist<TConta>.Create;
+  end;
+
+//destrutor
+  destructor TBanco.destroy;
+  begin
+    FClientes.free;
+    FContas.free;
+    inherited;
+  end;
+
+
+//procedimentos de adição
+  procedure TBanco.AdicionarCliente(aCliente: TCliente);
+  begin
+    if not Fclientes.IndexOf(aCliente) = -1 then
+      raise Exception.Create('Cliente já cadastrado');
+    FClientes.Add(aCliente);
+
+  end;
+
+  procedure TBanco.AdicionarConta(aConta: TConta);
+  begin
+    if not FContas.IndexOf(aConta) = -1 then
+      raise Exception.Create('Conta já cadastrado');
+    FContas.Add(aConta);
+  end;
+
+//funções de busca
+  function TBanco.BuscarCliente(aCPF: string): TCliente;
+  begin
+
+  end;
+
+  function TBanco.BuscarConta(aNumero: string): TConta;
+  begin
+
+  end;
+
+//procedimentos de exclusão
+  procedure TBanco.DesativarCliente;
+  begin
+
+  end;
+
+  procedure TBanco.DesativarConta;
+  begin
+
+  end;
+
+//função para gerar relatório
+  function TBanco.GerarRelatorioTransacoes: string;
+  begin
+
+  end;
+end.

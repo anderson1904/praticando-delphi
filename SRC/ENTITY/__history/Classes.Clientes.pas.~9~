@@ -1,0 +1,24 @@
+unit Classes.Clientes;
+
+interface
+uses system.Generics.Collections;
+type
+TCliente = class
+private
+  FCPF:   string;
+  FNome:  string;
+  FSenha: string;
+
+  procedure Autenticar;
+ 	procedure TrocarSenha(aSenhaAtual: string; aNovaSenha: string);
+protected
+  { protected declarations }
+public
+  { public declarations }
+
+published
+  { published declarations }
+end;
+implementation
+
+end.

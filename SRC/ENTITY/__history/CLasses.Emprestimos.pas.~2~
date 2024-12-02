@@ -1,0 +1,19 @@
+unit CLasses.Emprestimos;
+
+interface
+type
+TEmprestimo = class
+private
+
+protected
+  { protected declarations }
+public
+  { public declarations }
+
+published
+  { published declarations }
+end;
+
+implementation
+
+end.

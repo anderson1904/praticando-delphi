@@ -1,0 +1,56 @@
+- Banco
+ 	- Contas
+ 	- Clientes
+
+ vou poder fazer em um banco
+ 	- AdicionarConta
+ 	- AdicionarCliente
+
+ 	- DesativarConta
+ 	- DesativarCliente
+
+ 	- BuscarConta(Numero)
+ 	- BuscarCliente(CPF)
+ 	- GerarRelatorioTransacoes
+
+
+- Cliente
+  	- Nome
+  	- CPF
+  	- Senha
+
+ vou poder fazer em um cliente
+ 	- Autenticar
+ 	- Trocar Senha
+
+
+- Conta
+	- Numero
+	- Saldo
+	- Cliente
+	- Transacoes
+	- Emprestimos
+
+ vou poder fazer em uma conta
+ 	- Depositar
+ 	- Sacar
+ 	- Transferir(Valor, ContaDestino)
+ 	- SolicitarEmprestimo(Valor, TaxaJuros, Meses)
+ 	- GerarExtrato
+
+
+ - Emprestimo
+ 	- Valor
+ 	- TaxaJuros
+ 	- DataInicio
+ 	- DataFim
+
+ vou poder fazer em um emprestimo
+ 	- CalcularJuros
+
+
+- Transacao
+	- Tipo (Deposito, Saque, Transferencia, Agendamento)
+	- Valor
+	- DataHora
+	- Descricao

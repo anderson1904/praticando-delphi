@@ -1,0 +1,37 @@
+unit Classes.Contas;
+
+
+interface
+  uses Classes.Clientes;
+type
+TConta = class
+private
+  FNumero:        string;
+  FSaldo:       Currency;
+  FCliente:     TCliente;
+  FTransacoes:    string;
+  FEmprestimos:   string;
+
+  procedure Depositar();
+ 	procedure Sacar;
+ 	procedure Transferir(
+    Valor:        currency;
+    ContaDestino:   string
+  );
+ 	procedure SolicitarEmprestimo(
+    Valor:      currency;
+    TaxaJuros:  currency;
+    Meses:        string
+  );
+ 	function GerarExtrato: string;
+protected
+  { protected declarations }
+public
+  { public declarations }
+
+published
+  { published declarations }
+end;
+implementation
+
+end.

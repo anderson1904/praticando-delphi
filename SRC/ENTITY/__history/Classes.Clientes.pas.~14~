@@ -1,0 +1,82 @@
+unit Classes.Clientes;
+
+interface
+uses system.Generics.Collections, System.SysUtils, System.RegularExpressions;
+type
+TCliente = class
+private
+  FCPF:   string;
+  FNome:  string;
+  FSenha: string;
+  FAtivado: boolean;
+
+  function Autenticar(aSenha: string): boolean;
+  procedure InserirSenha(aSenha: string);
+ 	procedure TrocarSenha(aSenhaAtual: string; aNovaSenha: string);
+
+  procedure SetCPF(aCPF: string);
+  procedure SetNome(aNome: string);
+
+protected
+  { protected declarations }
+public
+  constructor create;
+  property CPF: string read FCPF write setCPF;
+  property nome: string read FNome write SetNome;
+  property Ativado: boolean read FAtivado;
+
+
+published
+  { published declarations }
+end;
+implementation
+
+//setters
+procedure TCliente.setCPF(aCPF: string);
+begin
+
+
+end;
+
+procedure TCliente.SetNome(aNome: string);
+begin
+
+end;
+
+
+
+//senha
+function TCliente.Autenticar(aSenha: string): boolean;
+var
+  LBool: Boolean;
+  LRegex: TRegEx;
+begin
+  LBool:= False;
+  LRegex:= TRegex.Create('(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])');
+  if Length(aSenha) <8 then
+    raise Exception.Create('a senha precisa ter 8 ou mais caracteres');
+  if not LRegex.Match(aSenha).Success then
+    raise Exception.Create('deve possuir pelo menos 1 Maiúscula, 1 Minuscula 1 Numero e 1 caractere especial');
+    LBool := True;
+  result:= Lbool;
+
+end;
+
+constructor TCliente.create;
+begin
+  FAtivado:= True;
+end;
+
+procedure TCliente.InserirSenha(aSenha: string);
+begin
+  Fsenha:= aSenha;
+end;
+
+procedure TCliente.TrocarSenha(aSenhaAtual: string; aNovaSenha: string);
+begin
+  if Fsenha = aSenhaAtual then
+    raise Exception.Create('senha incorreta');
+  Fsenha:= aNovaSenha;
+end;
+
+end.

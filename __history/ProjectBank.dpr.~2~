@@ -1,0 +1,15 @@
+program ProjectBank;
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  testeInterface in 'GUI\testeInterface.pas' {Form1},
+  Classes.Clientes in 'SRC\ENTITY\Classes.Clientes.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

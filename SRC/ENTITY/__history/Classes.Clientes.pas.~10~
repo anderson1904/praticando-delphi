@@ -1,0 +1,43 @@
+unit Classes.Clientes;
+
+interface
+uses system.Generics.Collections;
+type
+TCliente = class
+private
+  FCPF:   string;
+  FNome:  string;
+  FSenha: string;
+
+  procedure Autenticar;
+ 	procedure TrocarSenha(aSenhaAtual: string; aNovaSenha: string);
+
+  procedure setCPF(aCPF: string);
+protected
+  { protected declarations }
+public
+  property CPF: string read FCPF write setCPF;
+
+published
+  { published declarations }
+end;
+implementation
+
+{ TCliente }
+
+procedure TCliente.Autenticar;
+begin
+
+end;
+
+procedure TCliente.setCPF(aCPF: string);
+begin
+
+end;
+
+procedure TCliente.TrocarSenha(aSenhaAtual, aNovaSenha: string);
+begin
+
+end;
+
+end.
