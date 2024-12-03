@@ -36,6 +36,7 @@ procedure TCliente.setCPF(aCPF: string);
 begin
   if not(length(aCPF) = 11) then
     raise Exception.Create('o CPF deve conter 11 números');
+  FCPF:= aCPF;
 
 end;
 
@@ -43,8 +44,6 @@ procedure TCliente.SetNome(aNome: string);
 begin
   FNome := aNome;
 end;
-
-
 
 //senha
 function TCliente.Autenticar(aSenha: string): boolean;
@@ -72,7 +71,7 @@ end;
 
 procedure TCliente.TrocarSenha(aSenhaAtual: string; aNovaSenha: string);
 begin
-  if  not(Fsenha = aSenhaAtual) then
+  if not(Fsenha = aSenhaAtual) then
     raise Exception.Create('senha incorreta');
   Fsenha:= aNovaSenha;
 end;

@@ -9,12 +9,47 @@ object Form1: TForm1
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
   DesignerMasterStyle = 0
-  object btnTestes: TButton
+  object btnAddCliente: TButton
     Position.X = 88.000000000000000000
     Position.Y = 120.000000000000000000
+    Size.Width = 105.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 0
-    Text = 'Testes'
+    Text = 'adicionar cliente'
     TextSettings.Trimming = None
-    OnClick = btnTestesClick
+    OnClick = btnAddClienteClick
+  end
+  object btnListarClientes: TButton
+    Position.X = 88.000000000000000000
+    Position.Y = 150.000000000000000000
+    Size.Width = 105.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = 'listar clientes'
+    TextSettings.Trimming = None
+    OnClick = btnListarClientesClick
+  end
+  object btnAddConta: TButton
+    Position.X = 201.000000000000000000
+    Position.Y = 120.000000000000000000
+    Size.Width = 97.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = 'adicionar conta'
+    TextSettings.Trimming = None
+    OnClick = btnAddContaClick
+  end
+  object btnListarContas: TButton
+    Position.X = 201.000000000000000000
+    Position.Y = 150.000000000000000000
+    Size.Width = 97.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'Listar Contas'
+    TextSettings.Trimming = None
   end
 end

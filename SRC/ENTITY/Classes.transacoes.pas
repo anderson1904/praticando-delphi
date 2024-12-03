@@ -49,7 +49,7 @@ end;
 
 procedure TTransação.setValor(aValor: currency);
 begin
-
+FValor := aValor;
 end;
 end.
 

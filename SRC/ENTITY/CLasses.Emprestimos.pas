@@ -4,10 +4,10 @@ interface
 type
   TEmprestimo = class
   private
-    FValor:      currency;
-    FJuros:      currency;
-    FDataInicio:   string;
-    FDataFim:      string;
+    FValor:          currency;
+    FTaxaJuros:      currency;
+    FDataInicio:       string;
+    FDataFim:          string;
 
     procedure setValor(aValor: currency);
     procedure setJuros(aValor: currency);
@@ -15,13 +15,12 @@ type
     procedure setDataFim (aValor: string);
 
     procedure CalcularJuros;
-    function getter: string;
 
   protected
     { protected declarations }
   public
     property Valor: currency read FValor write setValor;
-    property Juros: currency read FJuros write setJuros;
+    property TaxaJuros: currency read FTaxaJuros write setJuros;
     property DataInicio: string read FDataInicio write setDataInicio;
     property DataFim: string read FDataFim write setDataFim;
 
@@ -34,27 +33,22 @@ type
 { TEmprestimo }
 procedure TEmprestimo.setValor(aValor: currency);
 begin
-  
+  FValor:= aValor;
 end;
 
 procedure TEmprestimo.setJuros(aValor: currency);
 begin
-
+  FTaxaJuros:= aValor;
 end;
 
 procedure TEmprestimo.setDataInicio(aValor: string);
 begin
-
-end;
-
-function TEmprestimo.getter: string;
-begin
-
+  FDataInicio:= aValor;
 end;
 
 procedure TEmprestimo.setDataFim(aValor: string);
 begin
-
+  FDataFim := aValor;
 end;
 
 procedure TEmprestimo.CalcularJuros;

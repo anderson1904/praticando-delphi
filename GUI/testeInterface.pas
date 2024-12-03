@@ -12,9 +12,14 @@ uses
 
 type
   TForm1 = class(TForm)
-    btnTestes: TButton;
+    btnAddCliente: TButton;
+    btnListarClientes: TButton;
+    btnAddConta: TButton;
+    btnListarContas: TButton;
     procedure FormCreate(Sender: TObject);
-    procedure btnTestesClick(Sender: TObject);
+    procedure btnAddClienteClick(Sender: TObject);
+    procedure btnListarClientesClick(Sender: TObject);
+    procedure btnAddContaClick(Sender: TObject);
   private
     FBanco: TBanco;
   public
@@ -26,19 +31,38 @@ var
 
 implementation
 {$R *.fmx}
-procedure TForm1.btnTestesClick(Sender: TObject);
+procedure TForm1.btnAddContaClick(Sender: TObject);
+var
+  LConta: TConta;
+begin
+  LConta := TConta.Create;
+  LConta.Numero := InputBox('Numero:','Numero','Numero...');
+  Lconta.Depositar(800);
+end;
+
+procedure TForm1.btnListarClientesClick(Sender: TObject);
+var
+ I: integer;
+begin
+
+for I := 0 to pred(FBanco.Clientes.count) do
+  ShowMessage(FBanco.Clientes[i].CPF + ' '+FBanco.Clientes[i].senha);
+
+end;
+
+procedure TForm1.btnAddClienteClick(Sender: TObject);
 var
   LCliente: TCLiente;
   LSenha: string;
 
 begin
   LCliente:=TCLiente.Create;
-  LCliente.CPF:=InputBox('CPF:','CPF:','CPF...');
-  LCliente.Nome:=InputBox('Nome:','Nome:','Nome...');
+  LCliente.CPF:= InputBox('CPF:','CPF:','CPF...');
+  LCliente.Nome:= InputBox('Nome:','Nome:','Nome...');
 
   LSenha:= inputbox('senha:','senha:','senha...');
   LCLiente.InserirSenha(Lsenha);
-  ShowMessage(LCLiente.nome + LCliente.CPF + LCliente.senha);
+  FBanco.AdicionarCliente(LCliente);
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);

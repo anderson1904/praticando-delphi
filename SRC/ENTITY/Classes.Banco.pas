@@ -29,7 +29,7 @@ type
 
     procedure DesativarConta(aConta: TConta);
     procedure DesativarCliente(aCliente: TCLiente);
-
+    property Clientes: TObjectlist<TCliente> read FClientes;
 end;
 implementation
 //construtor
