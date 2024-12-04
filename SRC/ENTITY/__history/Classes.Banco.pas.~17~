@@ -27,9 +27,9 @@ type
     function BuscarConta(aNumero:string): TConta;
     function BuscarCliente(aCPF: string): TCliente;
 
-    procedure DesativarConta(aConta: string);
-    procedure DesativarCliente(aConta: string);
-
+    procedure DesativarConta(aConta: TConta);
+    procedure DesativarCliente(aCliente: TCLiente);
+    property Clientes: TObjectlist<TCliente> read FClientes;
 end;
 implementation
 //construtor
@@ -51,7 +51,7 @@ implementation
 //procedimentos de adição
   procedure TBanco.AdicionarCliente(aCliente: TCliente);
   begin
-    if Fclientes.IndexOf(aCliente) = -1 then
+    if not Fclientes.IndexOf(aCliente) = -1 then
       raise Exception.Create('Cliente já cadastrado');
     FClientes.Add(aCliente);
 
@@ -59,29 +59,51 @@ implementation
 
   procedure TBanco.AdicionarConta(aConta: TConta);
   begin
-
+    if not FContas.IndexOf(aConta) = -1 then
+      raise Exception.Create('Conta já cadastrado');
+    FContas.Add(aConta);
   end;
 
 //funções de busca
   function TBanco.BuscarCliente(aCPF: string): TCliente;
+ var
+  i: integer;
   begin
-
+    result:= nil;
+    for i := 0 to pred(FClientes.Count) do
+    begin
+      if FClientes[i].CPF = aCPF then
+      begin
+        result := FClientes[i];
+        break;
+      end;
+    end;
   end;
 
   function TBanco.BuscarConta(aNumero: string): TConta;
+  var
+    i: integer;
   begin
-
+    result:= nil;
+    for i := 0 to pred(FContas.Count) do
+    begin
+      if FContas[i].Numero = aNumero then
+      begin
+        result := FContas[i];
+        break;
+      end;
+    end;
   end;
 
-//procedimentos de exclusão
-  procedure TBanco.DesativarCliente;
+//procedimentos de desativar
+  procedure TBanco.DesativarCliente(aCliente: TCliente);
   begin
-
+    aCliente.Ativado := False;
   end;
 
-  procedure TBanco.DesativarConta;
+  procedure TBanco.DesativarConta(aConta: TConta);
   begin
-
+    aConta.Ativado:= False;
   end;
 
 //função para gerar relatório

@@ -20,8 +20,6 @@ type
     btnDepositar: TButton;
     btnTransferir: TButton;
     btnPedirEmprestimo: TButton;
-    btnListarEmprestimos: TButton;
-    btnGerarExtrato: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnAddClienteClick(Sender: TObject);
     procedure btnListarClientesClick(Sender: TObject);

@@ -21,9 +21,6 @@ type
     { protected declarations }
 
   public
-    constructor create;
-    destructor destroy;
-
     property Tipo: string read FTipo write setTipo;
     property Valor: currency read FValor write setValor;
     property DataHora: string read FDataHora write setDataHora;
@@ -36,17 +33,6 @@ implementation
 
 { TTransação }
 
-constructor TTransação.create;
-begin
-
-end;
-
-destructor TTransação.destroy;
-begin
-
-  inherited;
-end;
-//setters
 procedure TTransação.setDataHora(aDataHora: string);
 begin
   FormatDateTime('yyyy-mm-dd hh:mm:ss', now);

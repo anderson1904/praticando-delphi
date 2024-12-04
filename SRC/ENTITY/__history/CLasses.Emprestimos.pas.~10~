@@ -20,9 +20,6 @@ type
   protected
     { protected declarations }
   public
-    constructor create;
-    destructor destroy;
-
     property Valor: currency read FValor write setValor;
     property TaxaJuros: currency read FTaxaJuros write setJuros;
     property DataInicio: string read FDataInicio write setDataInicio;
@@ -33,22 +30,8 @@ type
   end;
 
 implementation
+
 { TEmprestimo }
-
-//construtor
-constructor TEmprestimo.create;
-begin
-
-end;
-
-//destruidor
-destructor TEmprestimo.destroy;
-begin
-
-  inherited;
-end;
-
-//setters
 procedure TEmprestimo.setValor(aValor: currency);
 begin
   FValor := aValor;
@@ -69,10 +52,8 @@ begin
   FDataFim := aValor;
 end;
 
-// calculo de Juros
 procedure TEmprestimo.CalcularJuros;
 begin
-
   // terei que pegar a quantidade de meses a partir do data inicio e data fim
   // depois só fazer o calculo dos juros
 end;

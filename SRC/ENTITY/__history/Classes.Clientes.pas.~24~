@@ -2,7 +2,7 @@ unit Classes.Clientes;
 
 interface
 
-uses system.SysUtils;
+uses system.Generics.Collections, system.SysUtils, system.RegularExpressions;
 
 type
   TCliente = class
@@ -19,7 +19,7 @@ type
     { protected declarations }
   public
     constructor create;
-    destructor destroy; override;
+    destructor destroy;
     property CPF: string read FCPF write SetCPF;
     property nome: string read FNome write SetNome;
     property senha: string read FSenha;
@@ -44,14 +44,13 @@ end;
 //destruidor
 destructor TCliente.destroy;
 begin
-
   inherited;
 end;
 
 // setters
 procedure TCliente.SetCPF(aCPF: string);
 begin
-  if CPF.Length <> 11 then
+  if not(length(aCPF) = 11) then
     raise Exception.create('o CPF deve conter 11 números');
   FCPF := aCPF;
 end;
@@ -66,25 +65,27 @@ begin
   FAtivado := aBool;
 end;
 
-// login
+// senha
 function TCliente.Autenticar(aCPF,aSenha: string): boolean;
+var
+  LBool: boolean;
 begin
-  result := False;
+  LBool := False;
   if (aCPF = FCPF) and (aSenha = FSenha) then
-    result:=True;
+    LBool := True;
+  result:=LBool;
 end;
 
-//senha
 procedure TCliente.InserirSenha(aSenha: string);
 begin
-  if aSenha.Length<8 then
+  if length(aSenha)<8 then
     raise Exception.create('a senha precisa ter 8 ou mais caracteres');
   FSenha := aSenha;
 end;
 
 procedure TCliente.TrocarSenha(aSenhaAtual: string; aNovaSenha: string);
 begin
-  if FSenha <> aSenhaAtual then
+  if not(FSenha = aSenhaAtual) then
     raise Exception.create('senha atual incorreta');
   FSenha := aNovaSenha;
 end;

@@ -72,7 +72,6 @@ end;
 // calculo de Juros
 procedure TEmprestimo.CalcularJuros;
 begin
-
   // terei que pegar a quantidade de meses a partir do data inicio e data fim
   // depois só fazer o calculo dos juros
 end;

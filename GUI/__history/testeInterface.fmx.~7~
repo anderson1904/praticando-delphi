@@ -67,11 +67,8 @@ object Form1: TForm1
     TextSettings.Trimming = None
   end
   object btnTransferir: TButton
-    Position.X = 88.000000000000000000
-    Position.Y = 340.000000000000000000
-    Size.Width = 80.000000000000000000
-    Size.Height = 22.000000000000000000
-    Size.PlatformDefault = False
+    Position.X = 184.000000000000000000
+    Position.Y = 280.000000000000000000
     TabOrder = 6
     Text = 'Transferir'
     TextSettings.Trimming = None
@@ -84,26 +81,6 @@ object Form1: TForm1
     Size.PlatformDefault = False
     TabOrder = 7
     Text = 'solicitar'#8298' Emprestimo'
-    TextSettings.Trimming = None
-  end
-  object btnListarEmprestimos: TButton
-    Position.X = 184.000000000000000000
-    Position.Y = 280.000000000000000000
-    Size.Width = 129.000000000000000000
-    Size.Height = 22.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 9
-    Text = 'Listar Emprestimos'
-    TextSettings.Trimming = None
-  end
-  object btnGerarExtrato: TButton
-    Position.X = 184.000000000000000000
-    Position.Y = 340.000000000000000000
-    Size.Width = 129.000000000000000000
-    Size.Height = 22.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 10
-    Text = 'Gerar Extrato'
     TextSettings.Trimming = None
   end
 end

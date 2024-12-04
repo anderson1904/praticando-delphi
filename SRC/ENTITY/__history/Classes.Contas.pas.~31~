@@ -13,14 +13,14 @@ type
     FSaldo: Currency;
     FCliente: TCliente;
     FAtivado: boolean;
-    FTransacoes: Tobjectlist<TTransaÃ§Ã£o>;
+    FTransacoes: Tobjectlist<TTransação>;
     FEmprestimos: Tobjectlist<TEmprestimo>;
 
     procedure setCliente(const aValue: TCliente);
     procedure SetAtivado(aBool: boolean);
     procedure SetNumero(aNumero: string);
 
-    procedure adicionarTransaÃ§Ã£o(aTipo: string; aValor: Currency;
+    procedure adicionarTransação(aTipo: string; aValor: Currency;
       aDataHora: string; aDescrisao: string);
   protected
     { protected declarations }
@@ -44,14 +44,47 @@ type
 implementation
 
 { TConta }
-//construtor
 constructor TConta.create;
 begin
   FSaldo := 0;
   FAtivado := True;
 end;
 
-//setters
+procedure TConta.adicionarTransação(aTipo: string; aValor: Currency;
+  aDataHora: string; aDescrisao: string);
+var
+  LTransação: TTransação;
+begin
+  LTransação := TTransação.create;
+  LTransação.Tipo := aTipo;
+  LTransação.Valor := aValor;
+  LTransação.DataHora := aDataHora;
+  LTransação.Descrisao := aDescrisao;
+  FTransacoes.add(LTransação);
+end;
+
+procedure TConta.Depositar(aValor: Currency);
+var
+  LDescrisao: string;
+begin
+
+  FSaldo := FSaldo - aValor;
+  adicionarTransação('deposito', aValor, 'data', '');
+end;
+
+function TConta.GerarExtrato: string;
+begin
+  // percorrer pela lista de transações
+
+  // colocar cada transação dentro de um frame
+end;
+
+procedure TConta.Sacar(aValor: Currency);
+begin
+  FSaldo := FSaldo + aValor;
+  adicionarTransação('Saque', aValor, 'data', '');
+end;
+
 procedure TConta.setCliente(const aValue: TCliente);
 begin
   FCliente := aValue;
@@ -67,39 +100,6 @@ begin
   FAtivado := aBool;
 end;
 
-//transaÃ§Ãµes
-procedure TConta.adicionarTransaÃ§Ã£o(aTipo: string; aValor: Currency;
-  aDataHora: string; aDescrisao: string);
-var
-  LTransaÃ§Ã£o: TTransaÃ§Ã£o;
-begin
-  LTransaÃ§Ã£o := TTransaÃ§Ã£o.create;
-  LTransaÃ§Ã£o.Tipo := aTipo;
-  LTransaÃ§Ã£o.Valor := aValor;
-  LTransaÃ§Ã£o.DataHora := aDataHora;
-  LTransaÃ§Ã£o.Descrisao := aDescrisao;
-  FTransacoes.add(LTransaÃ§Ã£o);
-end;
-
-//depositos
-procedure TConta.Depositar(aValor: Currency);
-var
-  LDescrisao: string;
-begin
-
-  FSaldo := FSaldo - aValor;
-  adicionarTransaÃ§Ã£o('deposito', aValor, 'data', '');
-end;
-
-//Saques
-procedure TConta.Sacar(aValor: Currency);
-var
-  LDescrisao: string;
-begin
-  FSaldo := FSaldo + aValor;
-  adicionarTransaÃ§Ã£o('Saque', aValor, 'data', '');
-end;
-
 procedure TConta.SolicitarEmprestimo(aValor: Currency; aTaxaJuros: Currency;
   aMeses: string);
 var
@@ -108,24 +108,16 @@ begin
   Lemprestimo := TEmprestimo.create;
   Lemprestimo.Valor := aValor;
   Lemprestimo.TaxaJuros := aTaxaJuros;
-  Lemprestimo.DataInicio := 'data exata da solicitaÃ§Ã£o';
-  Lemprestimo.DataFim := 'data de solicitaÃ§Ã£o + aMeses';
+  Lemprestimo.DataInicio := 'data exata da solicitação';
+  Lemprestimo.DataFim := 'data de solicitação + aMeses';
   FEmprestimos.add(Lemprestimo)
 end;
 
 procedure TConta.Transferir(aValor: Currency; aDestino: TConta);
-var
-  LDescrisao: string;
 begin
   self.FSaldo := self.FSaldo - aValor;
   aDestino.FSaldo := aDestino.FSaldo + aValor;
-  adicionarTransaÃ§Ã£o('transferencia', aValor, 'data', '');
+  adicionarTransação('transferencia', aValor, 'data', '');
 end;
-//extrato
-function TConta.GerarExtrato: string;
-begin
-  // percorrer pela lista de transaÃ§Ãµes
 
-  // colocar cada transaÃ§Ã£o dentro de um frame
-end;
 end.

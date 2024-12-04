@@ -109,6 +109,7 @@ implementation
 //função para gerar relatório
   function TBanco.GerarRelatorioTransacoes: string;
   begin
-
+    //percorrer por todos as contas e pegar o extrato de todas as transações
+    //retornar todas elas uma por uma
   end;
 end.

@@ -93,7 +93,7 @@ procedure TConta.Depositar(aValor: Currency);
 var
   LDescrisao: string;
 begin
-  LDescrisao:='R$'+'valor total'+' depositados com sucesso';
+
   FSaldo := FSaldo - aValor;
   adicionarTransação('deposito', aValor, 'data', '');
 end;
@@ -103,9 +103,8 @@ procedure TConta.Sacar(aValor: Currency);
 var
   LDescrisao: string;
 begin
-  LDescrisao:='R$'+'valor total'+' sacados com sucesso';
   FSaldo := FSaldo + aValor;
-  adicionarTransação('Saque', aValor, 'data', LDescrisao);
+  adicionarTransação('Saque', aValor, 'data', '');
 end;
 
 //solicitar emprestimo
@@ -127,7 +126,6 @@ procedure TConta.Transferir(aValor: Currency; aDestino: TConta);
 var
   LDescrisao: string;
 begin
-  LDescrisao:= 'R$'+ 'valor'+ ' transferidos para a conta: '+ aDestino.FNumero;
   self.FSaldo := self.FSaldo - aValor;
   aDestino.FSaldo := aDestino.FSaldo + aValor;
   adicionarTransação('transferencia', aValor, 'data', '');
