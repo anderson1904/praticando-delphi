@@ -16,10 +16,6 @@ type
     btnListarClientes: TButton;
     btnAddConta: TButton;
     btnListarContas: TButton;
-    btnSacar: TButton;
-    btnDepositar: TButton;
-    btnTransferir: TButton;
-    btnPedirEmprestimo: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnAddClienteClick(Sender: TObject);
     procedure btnListarClientesClick(Sender: TObject);

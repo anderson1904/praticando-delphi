@@ -53,34 +53,17 @@ object Form1: TForm1
     TextSettings.Trimming = None
   end
   object btnSacar: TButton
-    Position.X = 88.000000000000000000
-    Position.Y = 280.000000000000000000
+    Position.X = 320.000000000000000000
+    Position.Y = 120.000000000000000000
     TabOrder = 4
     Text = 'Sacar'
     TextSettings.Trimming = None
   end
   object btnDepositar: TButton
-    Position.X = 88.000000000000000000
-    Position.Y = 310.000000000000000000
+    Position.X = 320.000000000000000000
+    Position.Y = 150.000000000000000000
     TabOrder = 5
-    Text = 'Depositar'
-    TextSettings.Trimming = None
-  end
-  object btnTransferir: TButton
-    Position.X = 184.000000000000000000
-    Position.Y = 280.000000000000000000
-    TabOrder = 6
-    Text = 'Transferir'
-    TextSettings.Trimming = None
-  end
-  object btnPedirEmprestimo: TButton
-    Position.X = 184.000000000000000000
-    Position.Y = 310.000000000000000000
-    Size.Width = 129.000000000000000000
-    Size.Height = 22.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 7
-    Text = 'solicitar'#8298' Emprestimo'
+    Text = 'btnDepositar'
     TextSettings.Trimming = None
   end
 end

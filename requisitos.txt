@@ -3,54 +3,54 @@
  	- Clientes
 
  vou poder fazer em um banco
- 	- AdicionarConta
- 	- AdicionarCliente
+ 	- AdicionarConta X
+ 	- AdicionarCliente X
 
- 	- DesativarConta
- 	- DesativarCliente
+ 	- DesativarConta X
+ 	- DesativarCliente X
 
- 	- BuscarConta(Numero)
- 	- BuscarCliente(CPF)
+ 	- BuscarConta(Numero) X
+ 	- BuscarCliente(CPF)  X
  	- GerarRelatorioTransacoes
 
 
 - Cliente
-  	- Nome
-  	- CPF
-  	- Senha
+  	- Nome X
+  	- CPF X
+  	- Senha X
 
  vou poder fazer em um cliente
- 	- Autenticar
- 	- Trocar Senha
+ 	- Autenticar X
+ 	- Trocar Senha X
 
 
 - Conta
-	- Numero
-	- Saldo
-	- Cliente
-	- Transacoes
-	- Emprestimos
+	- Numero X
+	- Saldo X
+	- Cliente 
+	- Transacoes X
+	- Empréstimos X
 
  vou poder fazer em uma conta
- 	- Depositar
- 	- Sacar
- 	- Transferir(Valor, ContaDestino)
- 	- SolicitarEmprestimo(Valor, TaxaJuros, Meses)
- 	- GerarExtrato
+ 	- Depositar X
+ 	- Sacar  X
+ 	- Transferir(Valor, ContaDestino) X
+ 	- SolicitarEmprestimo(Valor, TaxaJuros, Meses)X
+ 	- GerarExtrato 
 
 
  - Emprestimo
- 	- Valor
- 	- TaxaJuros
- 	- DataInicio
- 	- DataFim
+ 	- Valor X
+ 	- TaxaJuros X
+ 	- DataInicio -
+ 	- DataFim -
 
  vou poder fazer em um emprestimo
  	- CalcularJuros
 
 
 - Transacao
-	- Tipo (Deposito, Saque, Transferencia, Agendamento)
-	- Valor
-	- DataHora
-	- Descricao
+	- Tipo (Deposito, Saque, Transferencia, Agendamento) X
+	- Valor X
+	- DataHora X
+	- Descricao X

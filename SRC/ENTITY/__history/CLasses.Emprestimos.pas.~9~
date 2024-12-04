@@ -1,19 +1,18 @@
 unit CLasses.Emprestimos;
 
 interface
-
 type
   TEmprestimo = class
   private
-    FValor: currency;
-    FTaxaJuros: currency;
-    FDataInicio: string;
-    FDataFim: string;
+    FValor:          currency;
+    FTaxaJuros:      currency;
+    FDataInicio:       string;
+    FDataFim:          string;
 
     procedure setValor(aValor: currency);
     procedure setJuros(aValor: currency);
     procedure setDataInicio(aValor: string);
-    procedure setDataFim(aValor: string);
+    procedure setDataFim (aValor: string);
 
     procedure CalcularJuros;
 
@@ -29,22 +28,22 @@ type
     { published declarations }
   end;
 
-implementation
+  implementation
 
 { TEmprestimo }
 procedure TEmprestimo.setValor(aValor: currency);
 begin
-  FValor := aValor;
+  FValor:= aValor;
 end;
 
 procedure TEmprestimo.setJuros(aValor: currency);
 begin
-  FTaxaJuros := aValor;
+  FTaxaJuros:= aValor;
 end;
 
 procedure TEmprestimo.setDataInicio(aValor: string);
 begin
-  FDataInicio := aValor;
+  FDataInicio:= aValor;
 end;
 
 procedure TEmprestimo.setDataFim(aValor: string);
@@ -54,8 +53,6 @@ end;
 
 procedure TEmprestimo.CalcularJuros;
 begin
-  // terei que pegar a quantidade de meses a partir do data inicio e data fim
-  // depois só fazer o calculo dos juros
-end;
 
+end;
 end.

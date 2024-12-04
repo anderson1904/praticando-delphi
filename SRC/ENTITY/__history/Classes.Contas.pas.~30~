@@ -34,7 +34,7 @@ type
       aMeses: string);
     function GerarExtrato: string;
 
-    property Numero:  string read FNumero write SetNumero;
+    property Numero: string read FNumero write SetNumero;
     property CLiente: TCliente read FCliente write setCliente;
     property Ativado: boolean read FAtivado write SetAtivado;
   published
@@ -64,10 +64,7 @@ begin
 end;
 
 procedure TConta.Depositar(aValor: Currency);
-var
-  LDescrisao: string;
 begin
-
   FSaldo := FSaldo - aValor;
   adicionarTransação('deposito', aValor, 'data', '');
 end;

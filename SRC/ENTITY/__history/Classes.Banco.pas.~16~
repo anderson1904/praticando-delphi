@@ -98,12 +98,14 @@ implementation
 //procedimentos de desativar
   procedure TBanco.DesativarCliente(aCliente: TCliente);
   begin
-    aCliente.Ativado := False;
+   aCliente.Ativado := False;
   end;
 
   procedure TBanco.DesativarConta(aConta: TConta);
   begin
-    aConta.Ativado:= False;
+//    if FContas.IndexOf(aConta) = -1 then
+//      raise Exception.Create('não tem essa conta na lista');
+//    FContas.Remove(aConta);
   end;
 
 //função para gerar relatório
