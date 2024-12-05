@@ -50,16 +50,12 @@ constructor TConta.create;
 begin
   FSaldo := 0;
   FAtivado := True;
-
-  FTransacoes:= TObjectlist<TTransação>.create;
-  FEMprestimos:= TObjectlist<TEmprestimo>.create;
 end;
 
 //destruidor
 destructor TConta.destroy;
 begin
-  FTransacoes.free;
-  FEmprestimos.free;
+
   inherited;
 end;
 
@@ -85,6 +81,7 @@ procedure TConta.adicionarTransação(aTipo: string; aValor: Currency;
 var
   LTransação: TTransação;
 begin
+//dando problemas aqui
   LTransação := TTransação.create;
   LTransação.Tipo := aTipo;
   LTransação.Valor := aValor;
@@ -100,7 +97,7 @@ var
 begin
   LDescrisao:='R$'+'valor total'+' depositados com sucesso';
   FSaldo := FSaldo + aValor;
-  adicionarTransação('deposito', aValor, 'data', '');
+  //adicionarTransação('deposito', aValor, 'data', '');
 end;
 
 //Saques
@@ -110,7 +107,7 @@ var
 begin
   LDescrisao:='R$'+'valor total'+' sacados com sucesso';
   FSaldo := FSaldo - aValor;
-  adicionarTransação('Saque', aValor, 'data', LDescrisao);
+  //adicionarTransação('Saque', aValor, 'data', LDescrisao);
 end;
 
 //solicitar emprestimo
@@ -135,7 +132,7 @@ begin
   LDescrisao:= 'R$'+ 'valor'+ ' transferidos para a conta: '+ aDestino.FNumero;
   self.FSaldo := self.FSaldo - aValor;
   aDestino.FSaldo := aDestino.FSaldo + aValor;
-  adicionarTransação('transferencia', aValor, 'data', '');
+  //adicionarTransação('transferencia', aValor, 'data', '');
 end;
 
 //extrato

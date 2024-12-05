@@ -51,7 +51,7 @@ end;
 // setters
 procedure TCliente.SetCPF(aCPF: string);
 begin
-  if aCPF.Length <> 11 then
+  if CPF.Length <> 11 then
     raise Exception.create('o CPF deve conter 11 números');
   FCPF := aCPF;
 end;
@@ -77,7 +77,7 @@ end;
 //senha
 procedure TCliente.InserirSenha(aSenha: string);
 begin
-  if aSenha.Length < 8 then
+  if aSenha.Length<8 then
     raise Exception.create('a senha precisa ter 8 ou mais caracteres');
   FSenha := aSenha;
 end;

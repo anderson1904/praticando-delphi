@@ -27,9 +27,10 @@ type
     function BuscarConta(aNumero:string): TConta;
     function BuscarCliente(aCPF: string): TCliente;
 
-    procedure DesativarConta(aConta: string);
-    procedure DesativarCliente(aConta: string);
-
+    procedure DesativarConta(aConta: TConta);
+    procedure DesativarCliente(aCliente: TCLiente);
+    property Clientes: TObjectlist<TCliente> read FClientes;
+    property Contas: TObjectlist<TConta> read FContas;
 end;
 implementation
 //construtor
@@ -66,29 +67,50 @@ implementation
 
 //funções de busca
   function TBanco.BuscarCliente(aCPF: string): TCliente;
+ var
+  i: integer;
   begin
-
+    result:= nil;
+    for i := 0 to pred(FClientes.Count) do
+    begin
+      if FClientes[i].CPF = aCPF then
+      begin
+        result := FClientes[i];
+        break;
+      end;
+    end;
   end;
 
   function TBanco.BuscarConta(aNumero: string): TConta;
+  var
+    i: integer;
   begin
-
+    result:= nil;
+    for i := 0 to pred(FContas.Count) do
+    begin
+      if FContas[i].Numero = aNumero then
+      begin
+        result := FContas[i];
+        break;
+      end;
+    end;
   end;
 
-//procedimentos de exclusão
-  procedure TBanco.DesativarCliente;
+//procedimentos de desativar
+  procedure TBanco.DesativarCliente(aCliente: TCliente);
   begin
-
+    aCliente.Ativado := False;
   end;
 
-  procedure TBanco.DesativarConta;
+  procedure TBanco.DesativarConta(aConta: TConta);
   begin
-
+    aConta.Ativado:= False;
   end;
 
 //função para gerar relatório
   function TBanco.GerarRelatorioTransacoes: string;
   begin
-
+    //percorrer por todos as contas e pegar o extrato de todas as transações
+    //retornar todas elas uma por uma
   end;
 end.

@@ -30,6 +30,7 @@ type
     procedure DesativarConta(aConta: TConta);
     procedure DesativarCliente(aCliente: TCLiente);
     property Clientes: TObjectlist<TCliente> read FClientes;
+    property Contas: TObjectlist<TConta> read FContas;
 end;
 implementation
 //construtor
@@ -50,17 +51,27 @@ implementation
 
 //procedimentos de adição
   procedure TBanco.AdicionarCliente(aCliente: TCliente);
+  var
+    I: integer;
   begin
-    if not Fclientes.IndexOf(aCliente) = -1 then
-      raise Exception.Create('Cliente já cadastrado');
-    FClientes.Add(aCliente);
+    for I := 0 to pred(FClientes.Count) do
+    begin
+      if Fclientes[i].CPF = aCLiente.CPF then
+        raise Exception.Create('Cliente já cadastrado');
+    end;
 
+    FClientes.Add(aCliente);
   end;
 
   procedure TBanco.AdicionarConta(aConta: TConta);
+  var
+    I: integer;
   begin
-    if not FContas.IndexOf(aConta) = -1 then
-      raise Exception.Create('Conta já cadastrado');
+    for I := 0 to pred(FContas.Count) do
+    begin
+      if FContas[i].Numero = aConta.Numero then
+        raise Exception.Create('Conta já cadastrado');
+    end;
     FContas.Add(aConta);
   end;
 

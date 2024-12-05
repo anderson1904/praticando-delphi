@@ -62,6 +62,7 @@ procedure TForm1.btnListarClientesClick(Sender: TObject);
 var
  I: integer;
 begin
+
   for I := 0 to pred(FBanco.Clientes.count) do
     ShowMessage(FBanco.Clientes[i].CPF + ' '+FBanco.Clientes[i].senha);
 
@@ -80,6 +81,7 @@ procedure TForm1.btnAddClienteClick(Sender: TObject);
 var
   LCliente: TCLiente;
   LSenha: string;
+
 begin
   LCliente:=TCLiente.Create;
   LCliente.CPF:= InputBox('CPF:','CPF:','CPF...');

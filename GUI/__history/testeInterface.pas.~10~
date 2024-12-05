@@ -41,27 +41,17 @@ implementation
 procedure TForm1.btnAddContaClick(Sender: TObject);
 var
   LConta: TConta;
-  LCPF: string;
-  LSenha: string;
-  LCliente: TCLiente;
 begin
-  LCPF:= inputbox('digite o CPF','CPF:','CPF...');
-  Lsenha:= inputbox('digite a senha','senha:','senha...');
-  LCliente:= FBanco.BuscarCliente(LCPF);
-  if LCLiente = nil then
-    raise Exception.Create('CLiente não encontrado');
-
   LConta := TConta.Create;
   LConta.Numero := InputBox('Numero:','Numero','Numero...');
-  LConta.CLiente:= LCliente;
   Lconta.Depositar(800);
-  FBanco.AdicionarConta(LConta);
 end;
 
 procedure TForm1.btnListarClientesClick(Sender: TObject);
 var
  I: integer;
 begin
+
   for I := 0 to pred(FBanco.Clientes.count) do
     ShowMessage(FBanco.Clientes[i].CPF + ' '+FBanco.Clientes[i].senha);
 
@@ -80,6 +70,7 @@ procedure TForm1.btnAddClienteClick(Sender: TObject);
 var
   LCliente: TCLiente;
   LSenha: string;
+
 begin
   LCliente:=TCLiente.Create;
   LCliente.CPF:= InputBox('CPF:','CPF:','CPF...');
