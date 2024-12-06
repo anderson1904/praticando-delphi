@@ -144,5 +144,6 @@ begin
   // percorrer pela lista de transações
 
   // colocar cada transação dentro de um frame
+  // e colocar ps frames dentro de um componente de lista
 end;
 end.
