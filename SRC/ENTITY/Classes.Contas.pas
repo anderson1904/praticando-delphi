@@ -21,7 +21,7 @@ type
     procedure SetNumero(aNumero: string);
 
     procedure adicionarTransação(aTipo: string; aValor: Currency;
-      aDataHora: string; aDescrisao: string);
+      aDataHora: TDateTime; aDescrisao: string);
   protected
     { protected declarations }
   public
@@ -81,7 +81,7 @@ end;
 
 //transações
 procedure TConta.adicionarTransação(aTipo: string; aValor: Currency;
-  aDataHora: string; aDescrisao: string);
+  aDataHora: TDateTime; aDescrisao: string);
 var
   LTransação: TTransação;
 begin
@@ -100,7 +100,7 @@ var
 begin
   LDescrisao:='R$'+'valor total'+' depositados com sucesso';
   FSaldo := FSaldo + aValor;
-  adicionarTransação('deposito', aValor, 'data', '');
+  //adicionarTransação('deposito', aValor, 'data', '');
 end;
 
 //Saques
@@ -110,7 +110,7 @@ var
 begin
   LDescrisao:='R$'+'valor total'+' sacados com sucesso';
   FSaldo := FSaldo - aValor;
-  adicionarTransação('Saque', aValor, 'data', LDescrisao);
+  //adicionarTransação('Saque', aValor, 'data', LDescrisao);
 end;
 
 //solicitar emprestimo
@@ -135,7 +135,7 @@ begin
   LDescrisao:= 'R$'+ 'valor'+ ' transferidos para a conta: '+ aDestino.FNumero;
   self.FSaldo := self.FSaldo - aValor;
   aDestino.FSaldo := aDestino.FSaldo + aValor;
-  adicionarTransação('transferencia', aValor, 'data', '');
+  //adicionarTransação('transferencia', aValor, 'data', '');
 end;
 
 //extrato

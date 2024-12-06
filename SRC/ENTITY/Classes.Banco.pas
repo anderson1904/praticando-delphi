@@ -1,7 +1,7 @@
 unit Classes.Banco;
 
 interface
-uses   System.Generics.Collections, System.SysUtils,
+uses System.Generics.Collections, System.SysUtils,
 Classes.Clientes, Classes.Contas;
 
 type

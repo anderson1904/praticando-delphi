@@ -13,15 +13,15 @@ type
     FSaldo: Currency;
     FCliente: TCliente;
     FAtivado: boolean;
-    FTransacoes: Tobjectlist<TTransaÃ§Ã£o>;
+    FTransacoes: Tobjectlist<TTransação>;
     FEmprestimos: Tobjectlist<TEmprestimo>;
 
     procedure setCliente(const aValue: TCliente);
     procedure SetAtivado(aBool: boolean);
     procedure SetNumero(aNumero: string);
 
-    procedure adicionarTransaÃ§Ã£o(aTipo: string; aValor: Currency;
-      aDataHora: TDateTime; aDescrisao: string);
+    procedure adicionarTransação(aTipo: string; aValor: Currency;
+      aDataHora: string; aDescrisao: string);
   protected
     { protected declarations }
   public
@@ -51,7 +51,7 @@ begin
   FSaldo := 0;
   FAtivado := True;
 
-  FTransacoes:= TObjectlist<TTransaÃ§Ã£o>.create;
+  FTransacoes:= TObjectlist<TTransação>.create;
   FEMprestimos:= TObjectlist<TEmprestimo>.create;
 end;
 
@@ -79,18 +79,18 @@ begin
   FAtivado := aBool;
 end;
 
-//transaÃ§Ãµes
-procedure TConta.adicionarTransaÃ§Ã£o(aTipo: string; aValor: Currency;
-  aDataHora: TDateTime; aDescrisao: string);
+//transações
+procedure TConta.adicionarTransação(aTipo: string; aValor: Currency;
+  aDataHora: string; aDescrisao: string);
 var
-  LTransaÃ§Ã£o: TTransaÃ§Ã£o;
+  LTransação: TTransação;
 begin
-  LTransaÃ§Ã£o := TTransaÃ§Ã£o.create;
-  LTransaÃ§Ã£o.Tipo := aTipo;
-  LTransaÃ§Ã£o.Valor := aValor;
-  LTransaÃ§Ã£o.DataHora := aDataHora;
-  LTransaÃ§Ã£o.Descrisao := aDescrisao;
-  FTransacoes.add(LTransaÃ§Ã£o);
+  LTransação := TTransação.create;
+  LTransação.Tipo := aTipo;
+  LTransação.Valor := aValor;
+  LTransação.DataHora := aDataHora;
+  LTransação.Descrisao := aDescrisao;
+  FTransacoes.add(LTransação);
 end;
 
 //depositos
@@ -100,7 +100,7 @@ var
 begin
   LDescrisao:='R$'+'valor total'+' depositados com sucesso';
   FSaldo := FSaldo + aValor;
-  //adicionarTransaÃ§Ã£o('deposito', aValor, 'data', '');
+  adicionarTransação('deposito', aValor, 'data', '');
 end;
 
 //Saques
@@ -110,7 +110,7 @@ var
 begin
   LDescrisao:='R$'+'valor total'+' sacados com sucesso';
   FSaldo := FSaldo - aValor;
-  //adicionarTransaÃ§Ã£o('Saque', aValor, 'data', LDescrisao);
+  adicionarTransação('Saque', aValor, 'data', LDescrisao);
 end;
 
 //solicitar emprestimo
@@ -122,8 +122,8 @@ begin
   Lemprestimo := TEmprestimo.create;
   Lemprestimo.Valor := aValor;
   Lemprestimo.TaxaJuros := aTaxaJuros;
-  Lemprestimo.DataInicio := 'data exata da solicitaÃ§Ã£o';
-  Lemprestimo.DataFim := 'data de solicitaÃ§Ã£o + aMeses';
+  Lemprestimo.DataInicio := 'data exata da solicitação';
+  Lemprestimo.DataFim := 'data de solicitação + aMeses';
   FEmprestimos.add(Lemprestimo)
 end;
 
@@ -135,15 +135,15 @@ begin
   LDescrisao:= 'R$'+ 'valor'+ ' transferidos para a conta: '+ aDestino.FNumero;
   self.FSaldo := self.FSaldo - aValor;
   aDestino.FSaldo := aDestino.FSaldo + aValor;
-  //adicionarTransaÃ§Ã£o('transferencia', aValor, 'data', '');
+  adicionarTransação('transferencia', aValor, 'data', '');
 end;
 
 //extrato
 function TConta.GerarExtrato: string;
 begin
-  // percorrer pela lista de transaÃ§Ãµes
+  // percorrer pela lista de transações
 
-  // colocar cada transaÃ§Ã£o dentro de um frame
+  // colocar cada transação dentro de um frame
   // e colocar ps frames dentro de um componente de lista
 end;
 end.
