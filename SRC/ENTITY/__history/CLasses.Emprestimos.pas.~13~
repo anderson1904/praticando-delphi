@@ -15,7 +15,7 @@ type
     procedure setDataInicio(aValor: TDateTime);
     procedure setDataFim(aValor: TDateTime);
 
-    Function CalcularJuros: currency;
+    procedure CalcularJuros;
 
   protected
     { protected declarations }
@@ -70,15 +70,15 @@ begin
 end;
 
 // calculo de Juros
-function TEmprestimo.CalcularJuros: Currency;
+procedure TEmprestimo.CalcularJuros;
 var
   LMeses: integer;
+  LJuros: double;
 begin
   // terei que pegar a quantidade de meses a partir do data inicio e data fim
-  LMeses:= DataFim.GetMonth + (DataFim.GetYear-Datainicio.GetYear)*12 - DataInicio.Month;
+  LMeses:= DataFim.GetMonth + (DataFim.GetYear-Datainicio.GetYear)*12 - DataInicio.Month
   // depois só fazer o calculo dos juros
-  Result := (Valor * TaxaJuros * LMeses);
-
+  LJuros := (Valor * TaxaJuros * LMeses);
 end;
 
 end.

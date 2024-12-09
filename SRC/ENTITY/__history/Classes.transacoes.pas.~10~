@@ -54,7 +54,6 @@ begin
 end;
 
 procedure TTransação.setDescrisao(aDescrisao: string);
-
 begin
   FDescrisao := aDescrisao;
 end;

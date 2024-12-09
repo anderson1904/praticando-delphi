@@ -1,21 +1,21 @@
 unit CLasses.Emprestimos;
 
 interface
-uses DateUtils;
+
 type
   TEmprestimo = class
   private
     FValor: currency;
     FTaxaJuros: currency;
-    FDataInicio: TDateTime;
-    FDataFim: TDateTime;
+    FDataInicio: string;
+    FDataFim: string;
 
     procedure setValor(aValor: currency);
     procedure setJuros(aValor: currency);
-    procedure setDataInicio(aValor: TDateTime);
-    procedure setDataFim(aValor: TDateTime);
+    procedure setDataInicio(aValor: string);
+    procedure setDataFim(aValor: string);
 
-    Function CalcularJuros: currency;
+    procedure CalcularJuros;
 
   protected
     { protected declarations }
@@ -25,8 +25,8 @@ type
 
     property Valor: currency read FValor write setValor;
     property TaxaJuros: currency read FTaxaJuros write setJuros;
-    property DataInicio: TDateTime read FDataInicio write setDataInicio;
-    property DataFim: TDateTime read FDataFim write setDataFim;
+    property DataInicio: string read FDataInicio write setDataInicio;
+    property DataFim: string read FDataFim write setDataFim;
 
   published
     { published declarations }
@@ -59,26 +59,22 @@ begin
   FTaxaJuros := aValor;
 end;
 
-procedure TEmprestimo.setDataInicio(aValor: TDateTime);
+procedure TEmprestimo.setDataInicio(aValor: string);
 begin
   FDataInicio := aValor;
 end;
 
-procedure TEmprestimo.setDataFim(aValor: TDateTime);
+procedure TEmprestimo.setDataFim(aValor: string);
 begin
   FDataFim := aValor;
 end;
 
 // calculo de Juros
-function TEmprestimo.CalcularJuros: Currency;
-var
-  LMeses: integer;
+procedure TEmprestimo.CalcularJuros;
 begin
-  // terei que pegar a quantidade de meses a partir do data inicio e data fim
-  LMeses:= DataFim.GetMonth + (DataFim.GetYear-Datainicio.GetYear)*12 - DataInicio.Month;
-  // depois só fazer o calculo dos juros
-  Result := (Valor * TaxaJuros * LMeses);
 
+  // terei que pegar a quantidade de meses a partir do data inicio e data fim
+  // depois só fazer o calculo dos juros
 end;
 
 end.
