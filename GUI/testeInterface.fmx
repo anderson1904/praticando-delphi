@@ -78,46 +78,39 @@ object Form1: TForm1
     TabOrder = 6
     Text = 'Transferir'
     TextSettings.Trimming = None
+    OnClick = btnTransferirClick
   end
   object btnPedirEmprestimo: TButton
-    Position.X = 184.000000000000000000
-    Position.Y = 310.000000000000000000
+    Position.X = 176.000000000000000000
+    Position.Y = 280.000000000000000000
     Size.Width = 129.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 7
     Text = 'solicitar'#8298' Emprestimo'
     TextSettings.Trimming = None
-  end
-  object btnListarEmprestimos: TButton
-    Position.X = 184.000000000000000000
-    Position.Y = 280.000000000000000000
-    Size.Width = 129.000000000000000000
-    Size.Height = 22.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 9
-    Text = 'Listar Emprestimos'
-    TextSettings.Trimming = None
+    OnClick = btnPedirEmprestimoClick
   end
   object btnGerarExtrato: TButton
-    Position.X = 184.000000000000000000
+    Position.X = 176.000000000000000000
     Position.Y = 340.000000000000000000
     Size.Width = 129.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 10
+    TabOrder = 9
     Text = 'Gerar Extrato'
     TextSettings.Trimming = None
     OnClick = btnGerarExtratoClick
   end
   object btnGerarRelatorio: TButton
-    Position.X = 360.000000000000000000
-    Position.Y = 208.000000000000000000
-    Size.Width = 136.000000000000000000
+    Position.X = 176.000000000000000000
+    Position.Y = 310.000000000000000000
+    Size.Width = 129.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 11
+    TabOrder = 10
     Text = 'relatorio de transa'#231#245'es'
     TextSettings.Trimming = None
+    OnClick = btnGerarRelatorioClick
   end
 end

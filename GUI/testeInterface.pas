@@ -20,7 +20,6 @@ type
     btnDepositar: TButton;
     btnTransferir: TButton;
     btnPedirEmprestimo: TButton;
-    btnListarEmprestimos: TButton;
     btnGerarExtrato: TButton;
     btnGerarRelatorio: TButton;
     procedure FormCreate(Sender: TObject);
@@ -31,6 +30,9 @@ type
     procedure btnGerarExtratoClick(Sender: TObject);
     procedure btnDepositarClick(Sender: TObject);
     procedure btnSacarClick(Sender: TObject);
+    procedure btnGerarRelatorioClick(Sender: TObject);
+    procedure btnTransferirClick(Sender: TObject);
+    procedure btnPedirEmprestimoClick(Sender: TObject);
   private
     FBanco: TBanco;
   public
@@ -82,9 +84,14 @@ begin
   ShowMessage(LConta.GerarExtrato);
 end;
 
+procedure TForm1.btnGerarRelatorioClick(Sender: TObject);
+begin
+  ShowMessage(FBanco.GerarRelatorioTransacoes);
+end;
+
 procedure TForm1.btnListarClientesClick(Sender: TObject);
 var
- I: integer;
+  I: integer;
 begin
   for I := 0 to pred(FBanco.Clientes.count) do
     ShowMessage(FBanco.Clientes[i].CPF + ' '+FBanco.Clientes[i].senha);
@@ -96,7 +103,16 @@ var
 begin
   for I := 0 to pred(FBanco.Contas.count) do
     ShowMessage(FBanco.Contas[i].Numero+ ': '+ FBanco.Contas[i].Saldo.ToString);
+end;
 
+procedure TForm1.btnPedirEmprestimoClick(Sender: TObject);
+var
+  LConta: TConta;
+  LValor: currency;
+begin
+  LConta:= GetConta;
+  LValor:= inputbox('valor','valor','valor...').ToDouble;
+  LConta.SolicitarEmprestimo(LValor,0.01,now,6);
 end;
 
 procedure TForm1.btnSacarClick(Sender: TObject);
@@ -105,8 +121,23 @@ var
   Lvalor: currency;
 begin
   LConta:= GetConta;
-  LValor:= inputbox('valor','valor','valor').ToDouble;
+  LValor:= inputbox('valor','valor','valor...').ToDouble;
   LConta.Sacar(LValor);
+end;
+
+procedure TForm1.btnTransferirClick(Sender: TObject);
+var
+  LContaInit: TConta;
+  LContaDest: TConta;
+  LValor: Currency;
+begin
+  ShowMessage('dados da conta atual');
+  LContaInit := GetConta;
+  ShowMessage('dados da conta que quer tranferir');
+  LContaDest := GetConta;
+  LValor := inputbox('valor','valor:','valor...').ToDouble;
+  LContaInit.Transferir(LValor,LContaDest);
+
 end;
 
 procedure TForm1.btnAddClienteClick(Sender: TObject);
