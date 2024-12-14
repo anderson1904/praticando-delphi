@@ -2,7 +2,7 @@ unit Classes.Banco;
 
 interface
 uses System.Generics.Collections, System.SysUtils,
-Classes.Clientes, Classes.Contas;
+Classes.Clientes, Classes.Contas, System.Classes;
 
 type
   TBanco = class
@@ -10,10 +10,6 @@ type
   private
     FClientes:  Tobjectlist<TCliente>;
     FContas:      Tobjectlist<TConta>;
-
-
-
-    function GerarRelatorioTransacoes:   string;
 
   protected
     { protected declarations }
@@ -26,11 +22,13 @@ type
 
     function BuscarConta(aNumero:string): TConta;
     function BuscarCliente(aCPF: string): TCliente;
+    function GerarRelatorioTransacoes:   string;
 
     procedure DesativarConta(aConta: TConta);
     procedure DesativarCliente(aCliente: TCLiente);
     property Clientes: TObjectlist<TCliente> read FClientes;
     property Contas: TObjectlist<TConta> read FContas;
+
 end;
 implementation
 //construtor
@@ -119,8 +117,23 @@ implementation
 
 //função para gerar relatório
   function TBanco.GerarRelatorioTransacoes: string;
+  var
+    LRelatorio: Tstringlist;
+    LConta: TConta;
   begin
-    //percorrer por todos as contas e pegar o extrato de todas as transações
-    //retornar todas elas uma por uma
+    LRelatorio:= Tstringlist.Create;
+    try
+      LRelatorio.Add('relatório de transações');
+      LRelatorio.Add('---------------------------');
+      for LConta in FContas do
+      begin
+        LRelatorio.Add(LConta.GerarExtrato);
+      end;
+
+      result:= LRelatorio.Text;
+    finally
+      LRelatorio.free;
+    end;
+
   end;
 end.

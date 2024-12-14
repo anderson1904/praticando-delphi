@@ -4,7 +4,8 @@ interface
 
 uses
   Classes.Clientes, Classes.Emprestimos, Classes.transacoes,
-  system.Generics.Collections, DateUtils;
+  system.Generics.Collections, DateUtils, System.SysUtils, System.Classes,
+  System.TypInfo;
 
 type
   TConta = class
@@ -13,26 +14,28 @@ type
     FSaldo: Currency;
     FCliente: TCliente;
     FAtivado: boolean;
-    FTransacoes: Tobjectlist<TTransação>;
+    FTransacoes: Tobjectlist<TTransacao>;
     FEmprestimos: Tobjectlist<TEmprestimo>;
 
     procedure setCliente(const aValue: TCliente);
     procedure SetAtivado(aBool: boolean);
     procedure SetNumero(aNumero: string);
 
-    procedure adicionarTransação(aTipo: string; aValor: Currency;
-      aDataHora: TDateTime; aDescrisao: string);
+    procedure adicionarTransacao(aTipo: TTransacaoTipos; aValor: Currency; aDescrisao: string);
   protected
     { protected declarations }
   public
     constructor create;
     destructor destroy;
-    procedure Depositar(aValor: Currency);
-    procedure Sacar(aValor: Currency);
+    procedure Depositar(aValor: Currency); overload;
+    procedure Depositar(aValor: Currency; aDescrisao: string); overload;
+    procedure Sacar(aValor: Currency); overload;
+    procedure Sacar(aValor: Currency;aTipo:TTransacaoTipos; aDescrisao: string); overload;
     procedure Transferir(aValor: Currency; aDestino: TConta);
     procedure SolicitarEmprestimo(aValor: Currency; aTaxaJuros: Currency;
       aDataInicio: TDateTime; aMeses: integer);
     function GerarExtrato: string;
+
     property Emprestimos: Tobjectlist<TEmprestimo> read FEmprestimos;
     property Numero:  string read FNumero write SetNumero;
     property CLiente: TCliente read FCliente write setCliente;
@@ -51,7 +54,7 @@ begin
   FSaldo := 0;
   FAtivado := True;
 
-  FTransacoes:= TObjectlist<TTransação>.create;
+  FTransacoes:= TObjectlist<TTransacao>.create;
   FEmprestimos:= TObjectlist<TEmprestimo>.create;
 end;
 
@@ -74,79 +77,112 @@ begin
   FNumero := aNumero;
 end;
 
+
 procedure TConta.SetAtivado(aBool: boolean);
 begin
   FAtivado := aBool;
 end;
 
 //transações
-procedure TConta.adicionarTransação(aTipo: string; aValor: Currency;
-  aDataHora: TDateTime; aDescrisao: string);
+procedure TConta.adicionarTransacao(aTipo: TTransacaoTipos; aValor: Currency;
+   aDescrisao: string);
 var
-  LTransação: TTransação;
+  LTransacao: TTransacao;
 begin
-  LTransação := TTransação.create;
-  LTransação.Tipo := aTipo;
-  LTransação.Valor := aValor;
-  LTransação.DataHora := aDataHora;
-  LTransação.Descrisao := aDescrisao;
-  FTransacoes.add(LTransação);
+  LTransacao := TTransacao.create;
+  LTransacao.Tipo := aTipo;
+  LTransacao.Valor := aValor;
+  LTransacao.Descrisao := aDescrisao;
+
+  FTransacoes.add(LTransacao);
 end;
 
 //depositos
 procedure TConta.Depositar(aValor: Currency);
 var
   LDescrisao: string;
-  LDataHora: TDateTime;
 begin
-  LDescrisao:='R$'+'valor total'+' depositados com sucesso';
+  LDescrisao:='R$'+avalor.ToString +' depositados com sucesso';
   FSaldo := FSaldo + aValor;
-  adicionarTransação('deposito', aValor, LDataHora.now, LDescrisao);
+  adicionarTransacao(tpDeposito,aValor, LDescrisao);
+end;
+
+procedure TConta.Depositar(aValor: Currency; aDescrisao: string);
+begin
+  FSaldo := FSaldo + aValor;
+  adicionarTransacao(tpDeposito, aValor, aDescrisao);
 end;
 
 //Saques
 procedure TConta.Sacar(aValor: Currency);
 var
   LDescrisao: string;
-  LDatahora: TDateTime;
 begin
-  LDescrisao:='R$'+'valor total'+' sacados com sucesso';
+  if aValor >FSaldo then
+    raise Exception.Create('Saldo insuficiente');
+
+  LDescrisao:='R$' + avalor.ToString +' sacados com sucesso';
   FSaldo := FSaldo - aValor;
-  adicionarTransação('Saque', aValor, LDataHora.Now, LDescrisao);
+  adicionarTransacao(tpSaque, aValor, LDescrisao);
 end;
+
+procedure TConta.Sacar(aValor: Currency;aTipo: TTransacaoTipos; aDescrisao: string);
+begin
+  if aValor >FSaldo then
+    raise Exception.Create('Saldo insuficiente');
+  FSaldo := FSaldo - aValor;
+  adicionarTransacao(aTipo, aValor, aDescrisao);
+end;
+
 
 //solicitar emprestimo
 procedure TConta.SolicitarEmprestimo(aValor: Currency; aTaxaJuros: Currency;
   aDataInicio: TDateTime; aMeses: integer);
 var
   Lemprestimo: TEmprestimo;
+  LDescrisao: string;
 begin
   Lemprestimo := TEmprestimo.create;
   Lemprestimo.Valor := aValor;
   Lemprestimo.TaxaJuros := aTaxaJuros;
   Lemprestimo.DataInicio := aDataInicio;
-  Lemprestimo.DataFim := aDataInicio;
+  Lemprestimo.DataFim := IncMonth(aDataInicio, AMeses);
   Emprestimos.add(Lemprestimo);
+  LDescrisao:= 'Você recebeu R$'+ aValor.ToString + ' de emprestimo';
+  depositar(aValor,Ldescrisao);
 end;
 
 //transferencia
 procedure TConta.Transferir(aValor: Currency; aDestino: TConta);
 var
   LDescrisao: string;
-  LDatahora: TDateTime;
 begin
-  LDescrisao:= 'R$'+ 'valor'+ ' transferidos para a conta: '+ aDestino.FNumero;
-  self.FSaldo := self.FSaldo - aValor;
-  aDestino.FSaldo := aDestino.FSaldo + aValor;
-  adicionarTransação('transferencia', aValor, LDataHora.now, LDescrisao);
+  LDescrisao:= 'R$'+ aValor.ToString+ ' transferidos para a conta: '+ aDestino.FNumero;
+  self.sacar(aValor,tpTransferencia, LDescrisao);
+  aDestino.Depositar(aValor);
 end;
 
 //extrato
 function TConta.GerarExtrato: string;
+var
+  LExtratos: TStringList;
+  Ltransacao: TTransacao;
 begin
-  // percorrer pela lista de transações
-
-  // colocar cada transação dentro de um frame
-  // e colocar ps frames dentro de um componente de lista
+  LExtratos:= Tstringlist.Create;
+  try
+    LExtratos.Add('extrato da conta '+ self.FNumero);
+    LExtratos.Add('------------------------------');
+    for Ltransacao in FTransacoes do
+    begin
+      LExtratos.Add(Ltransacao.DataHora.ToString + ' - ' +
+                   getenumname(Typeinfo(TTransacaoTipos), integer(Ltransacao.Tipo)) + ' R$ ' +
+                   LTransacao.Valor.ToString + ' - '  +
+                   LTransacao.Descrisao);
+    end;
+    LExtratos.add('Saldo atual: R$ '+ FSaldo.ToString);
+    result:= Lextratos.Text;
+  finally
+    LExtratos.Free;
+  end;
 end;
 end.

@@ -5,15 +5,15 @@ interface
 uses System.SysUtils;
 
 type
-  TTipos = (tpDeposito, tpSaque, tpTransferencia, tpAgendamento);
-  TTransação = class
+  TTransacaoTipos = (tpDeposito, tpSaque, tpTransferencia, tpAgendamento);
+  TTransacao = class
   private
-    FTipo: string;
+    FTipo: TTransacaoTipos;
     FValor: currency;
     FDataHora: TDateTime;
     FDescrisao: string;
 
-    procedure setTipo(aTipo: string);
+    procedure setTipo(aTipo: TTransacaoTipos);
     procedure setValor(aValor: currency);
     procedure setDataHora(aDataHora: TDateTime);
     procedure setDescrisao(aDescrisao: string);
@@ -25,7 +25,7 @@ type
     constructor create;
     destructor destroy;
 
-    property Tipo: string read FTipo write setTipo;
+    property Tipo: TTransacaoTipos read FTipo write setTipo;
     property Valor: currency read FValor write setValor;
     property DataHora: TDateTime read FDataHora write setDataHora;
     property Descrisao: string read FDescrisao write setDescrisao;
@@ -37,39 +37,33 @@ implementation
 
 { TTransação }
 
-constructor TTransação.create;
+constructor TTransacao.create;
 begin
-
+  FDataHora:= now;
 end;
 
-destructor TTransação.destroy;
+destructor TTransacao.destroy;
 begin
 
   inherited;
 end;
 //setters
-procedure TTransação.setDataHora(aDataHora: TDateTime);
+procedure TTransacao.setDataHora(aDataHora: TDateTime);
 begin
   FDataHora := aDataHora;
 end;
 
-procedure TTransação.setDescrisao(aDescrisao: string);
-
+procedure TTransacao.setDescrisao(aDescrisao: string);
 begin
   FDescrisao := aDescrisao;
 end;
 
-procedure TTransação.setTipo(aTipo: string);
-var
-  LTipos : TTipos;
-  I : integer;
+procedure TTransacao.setTipo(aTipo: TTransacaoTipos);
 begin
-    if True then
-    // raise Exception.Create('esse campo só possui Deposito, Saque, Transferencia e Agendamento');
     FTipo := aTipo;
 end;
 
-procedure TTransação.setValor(aValor: currency);
+procedure TTransacao.setValor(aValor: currency);
 begin
   FValor := aValor;
 end;

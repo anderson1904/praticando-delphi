@@ -1,7 +1,7 @@
 unit CLasses.Emprestimos;
 
 interface
-uses DateUtils;
+uses DateUtils, System.SysUtils;
 type
   TEmprestimo = class
   private
@@ -61,6 +61,8 @@ end;
 
 procedure TEmprestimo.setDataInicio(aValor: TDateTime);
 begin
+  if aValor < now then
+    raise Exception.Create('a data não pode ser antes da data de hoje');
   FDataInicio := aValor;
 end;
 
@@ -75,7 +77,7 @@ var
   LMeses: integer;
 begin
   // terei que pegar a quantidade de meses a partir do data inicio e data fim
-  LMeses:= DataFim.GetMonth + (DataFim.GetYear-Datainicio.GetYear)*12 - DataInicio.Month;
+  LMeses:= DataFim.GetMonth + (DataFim.GetYear - Datainicio.GetYear)*12 - DataInicio.GetMonth;
   // depois só fazer o calculo dos juros
   Result := (Valor * TaxaJuros * LMeses);
 
