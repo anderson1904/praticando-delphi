@@ -24,6 +24,8 @@ type
     function BuscarCliente(aCPF: string): TCliente;
     function GerarRelatorioTransacoes:   string;
 
+    procedure AtivarConta(aConta: TConta);
+    procedure AtivarCliente(aCliente: TCLiente);
     procedure DesativarConta(aConta: TConta);
     procedure DesativarCliente(aCliente: TCLiente);
     property Clientes: TObjectlist<TCliente> read FClientes;
@@ -50,11 +52,11 @@ implementation
 //procedimentos de adição
   procedure TBanco.AdicionarCliente(aCliente: TCliente);
   var
-    I: integer;
+    LCliente: TCliente;
   begin
-    for I := 0 to pred(FClientes.Count) do
+    for LCliente in FClientes do
     begin
-      if Fclientes[i].CPF = aCLiente.CPF then
+      if LCliente.CPF = aCLiente.CPF then
         raise Exception.Create('Cliente já cadastrado');
     end;
 
@@ -63,11 +65,11 @@ implementation
 
   procedure TBanco.AdicionarConta(aConta: TConta);
   var
-    I: integer;
+    LConta: TConta;
   begin
-    for I := 0 to pred(FContas.Count) do
+    for LConta in FContas do
     begin
-      if FContas[i].Numero = aConta.Numero then
+      if LConta.Numero = aConta.Numero then
         raise Exception.Create('Conta já cadastrado');
     end;
     FContas.Add(aConta);
@@ -75,15 +77,15 @@ implementation
 
 //funções de busca
   function TBanco.BuscarCliente(aCPF: string): TCliente;
- var
-  i: integer;
+  var
+    LCliente: TCliente;
   begin
     result:= nil;
-    for i := 0 to pred(FClientes.Count) do
+    for Lcliente in FClientes do
     begin
-      if FClientes[i].CPF = aCPF then
+      if LCliente.CPF = aCPF then
       begin
-        result := FClientes[i];
+        result := LCliente;
         break;
       end;
     end;
@@ -91,17 +93,28 @@ implementation
 
   function TBanco.BuscarConta(aNumero: string): TConta;
   var
-    i: integer;
+    LConta: TConta;
   begin
     result:= nil;
-    for i := 0 to pred(FContas.Count) do
+    for LConta in FContas do
     begin
-      if FContas[i].Numero = aNumero then
+      if LConta.Numero = aNumero then
       begin
-        result := FContas[i];
+        result := LConta;
         break;
       end;
     end;
+  end;
+
+//procedimentos de ativar
+  procedure TBanco.AtivarCliente(aCliente: TCLiente);
+  begin
+    aCliente.Ativado := True;
+  end;
+
+  procedure TBanco.AtivarConta(aConta: TConta);
+  begin
+    aConta.Ativado:= True;
   end;
 
 //procedimentos de desativar

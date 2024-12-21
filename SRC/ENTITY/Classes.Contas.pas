@@ -102,7 +102,7 @@ procedure TConta.Depositar(aValor: Currency);
 var
   LDescrisao: string;
 begin
-  LDescrisao:='R$'+avalor.ToString +' depositados com sucesso';
+  LDescrisao:=format('R$ %d depositados com sucesso',[aValor]);
   FSaldo := FSaldo + aValor;
   adicionarTransacao(tpDeposito,aValor, LDescrisao);
 end;
@@ -121,7 +121,7 @@ begin
   if aValor >FSaldo then
     raise Exception.Create('Saldo insuficiente');
 
-  LDescrisao:='R$' + avalor.ToString +' sacados com sucesso';
+  LDescrisao:=format('R$ %d sacados com sucesso',[aValor]);
   FSaldo := FSaldo - aValor;
   adicionarTransacao(tpSaque, aValor, LDescrisao);
 end;
@@ -148,7 +148,7 @@ begin
   Lemprestimo.DataInicio := aDataInicio;
   Lemprestimo.DataFim := IncMonth(aDataInicio, AMeses);
   Emprestimos.add(Lemprestimo);
-  LDescrisao:= 'Você recebeu R$'+ aValor.ToString + ' de emprestimo';
+  LDescrisao:= format('Você recebeu R$ %d de emprestimo',[aValor]);
   depositar(aValor,Ldescrisao);
 end;
 
@@ -157,7 +157,7 @@ procedure TConta.Transferir(aValor: Currency; aDestino: TConta);
 var
   LDescrisao: string;
 begin
-  LDescrisao:= 'R$'+ aValor.ToString+ ' transferidos para a conta: '+ aDestino.FNumero;
+  LDescrisao:= format('R$ %d transferidos para a conta: %s',[aValor, aDestino.FNumero]);
   self.sacar(aValor,tpTransferencia, LDescrisao);
   aDestino.Depositar(aValor);
 end;
@@ -167,17 +167,21 @@ function TConta.GerarExtrato: string;
 var
   LExtratos: TStringList;
   Ltransacao: TTransacao;
+  LTipoTransacao: string;
+
 begin
   LExtratos:= Tstringlist.Create;
   try
     LExtratos.Add('extrato da conta '+ self.FNumero);
-    LExtratos.Add('------------------------------');
+    LExtratos.Add('-------------------------------------------------------');
     for Ltransacao in FTransacoes do
     begin
-      LExtratos.Add(Ltransacao.DataHora.ToString + ' - ' +
-                   getenumname(Typeinfo(TTransacaoTipos), integer(Ltransacao.Tipo)) + ' R$ ' +
-                   LTransacao.Valor.ToString + ' - '  +
-                   LTransacao.Descrisao);
+      LTipoTransacao:= getenumname(Typeinfo(TTransacaoTipos), integer(Ltransacao.Tipo));
+      LExtratos.Add(format('%s - %s - R$ %s',
+                          [Ltransacao.DataHora.ToString,
+                           LTipoTransacao,
+                           LTransacao.Descrisao
+                          ]));
     end;
     LExtratos.add('Saldo atual: R$ '+ FSaldo.ToString);
     result:= Lextratos.Text;

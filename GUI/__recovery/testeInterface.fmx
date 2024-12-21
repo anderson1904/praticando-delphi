@@ -1,0 +1,116 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object btnAddCliente: TButton
+    Position.X = 88.000000000000000000
+    Position.Y = 120.000000000000000000
+    Size.Width = 105.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Text = 'adicionar cliente'
+    TextSettings.Trimming = None
+    OnClick = btnAddClienteClick
+  end
+  object btnListarClientes: TButton
+    Position.X = 88.000000000000000000
+    Position.Y = 150.000000000000000000
+    Size.Width = 105.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = 'listar clientes'
+    TextSettings.Trimming = None
+    OnClick = btnListarClientesClick
+  end
+  object btnAddConta: TButton
+    Position.X = 201.000000000000000000
+    Position.Y = 120.000000000000000000
+    Size.Width = 97.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = 'adicionar conta'
+    TextSettings.Trimming = None
+    OnClick = btnAddContaClick
+  end
+  object btnListarContas: TButton
+    Position.X = 201.000000000000000000
+    Position.Y = 150.000000000000000000
+    Size.Width = 97.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'Listar Contas'
+    TextSettings.Trimming = None
+    OnClick = btnListarContasClick
+  end
+  object btnSacar: TButton
+    Position.X = 88.000000000000000000
+    Position.Y = 280.000000000000000000
+    TabOrder = 4
+    Text = 'Sacar'
+    TextSettings.Trimming = None
+    OnClick = btnSacarClick
+  end
+  object btnDepositar: TButton
+    Position.X = 88.000000000000000000
+    Position.Y = 310.000000000000000000
+    TabOrder = 5
+    Text = 'Depositar'
+    TextSettings.Trimming = None
+    OnClick = btnDepositarClick
+  end
+  object btnTransferir: TButton
+    Position.X = 88.000000000000000000
+    Position.Y = 340.000000000000000000
+    Size.Width = 80.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    Text = 'Transferir'
+    TextSettings.Trimming = None
+    OnClick = btnTransferirClick
+  end
+  object btnPedirEmprestimo: TButton
+    Position.X = 176.000000000000000000
+    Position.Y = 280.000000000000000000
+    Size.Width = 129.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    Text = 'solicitar'#8298' Emprestimo'
+    TextSettings.Trimming = None
+    OnClick = btnPedirEmprestimoClick
+  end
+  object btnGerarExtrato: TButton
+    Position.X = 176.000000000000000000
+    Position.Y = 340.000000000000000000
+    Size.Width = 129.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 9
+    Text = 'Gerar Extrato'
+    TextSettings.Trimming = None
+    OnClick = btnGerarExtratoClick
+  end
+  object btnGerarRelatorio: TButton
+    Position.X = 176.000000000000000000
+    Position.Y = 310.000000000000000000
+    Size.Width = 129.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 10
+    Text = 'relatorio de transa'#231#245'es'
+    TextSettings.Trimming = None
+    OnClick = btnGerarRelatorioClick
+  end
+end
